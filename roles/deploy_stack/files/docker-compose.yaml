@@ -1,0 +1,12 @@
+version: '3'
+services:
+  app:
+    image: wesleywillians/hello-express
+    ports:
+      - 3000:3000
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        

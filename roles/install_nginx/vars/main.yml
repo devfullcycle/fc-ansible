@@ -1,0 +1,4 @@
+---
+# vars file for install_nginx
+hello_fullcycle: "Hello Full Cycle!!!"
+url_app: "http://localhost:3002"

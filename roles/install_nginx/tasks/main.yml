@@ -1,0 +1,56 @@
+---
+- name: Install nginx
+  apt:
+    pkg:
+      - nginx
+      - nodejs
+      - npm
+    state: present
+    update_cache: yes
+
+- name: Init nginx
+  service:
+    name: nginx
+    state: started
+
+- name: create dir /app
+  file:
+    path: /app
+    state: directory
+    
+- name: copy package.json
+  copy:
+    src: package.json
+    dest: /app/package.json
+
+- name: npm Install
+  npm:
+    path: /app
+    state: present
+
+- name: copy index.js
+  template:
+    src: index.js.j2
+    dest: /app/index.js
+
+- name: copy app.service
+  copy: 
+    src: app.service
+    dest: /etc/systemd/system/app.service
+
+- name: enable app.service
+  systemd:
+    name: app
+    enabled: yes
+
+- name: run app service
+  systemd:
+    name: app
+    state: started    
+
+- name: copy nginx.conf
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: reload nginx
+    

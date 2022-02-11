@@ -1,0 +1,6 @@
+---
+# handlers file for install_nginx
+- name: reload nginx
+  systemd:
+    name: nginx
+    state: reloaded

@@ -1,0 +1,9 @@
+[Service]
+WorkingDirectory=/app
+ExecStart=/usr/bin/node index.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=app-node
+user=root
+group=root

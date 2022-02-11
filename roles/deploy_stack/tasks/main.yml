@@ -1,0 +1,12 @@
+---
+- name: copy docker-compose to remote host
+  copy: 
+    src: "docker-compose.yaml"
+    dest: "/opt/docker-compose.yaml"
+    
+- name: deploy stack
+  docker_stack:
+    state: present
+    name: app
+    compose:
+      - "/opt/docker-compose.yaml"

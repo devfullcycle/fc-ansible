@@ -1,0 +1,9 @@
+---
+- name: Init docker swarm
+  docker_swarm:
+    state: present
+  register: init_swarm
+
+- name: join
+  set_fact:
+    join_token_worker: "{{ init_swarm.swarm_facts.JoinTokens.Worker }}"
